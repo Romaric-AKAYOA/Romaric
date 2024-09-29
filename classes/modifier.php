@@ -1,6 +1,7 @@
 <?php
-include('../../src/db.php');
-include('../../src/classes.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/classes.php');    
+
 
 $id = $_GET['id'];
 $classe = get_classe_by_id($id);

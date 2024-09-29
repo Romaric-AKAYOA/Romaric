@@ -1,6 +1,8 @@
 <?php
-include('../../src/db.php');
-include('../../src/etudiants.php');
+// Inclure les fichiers nécessaires
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/etudiants.php');    
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = $_POST['nom'];

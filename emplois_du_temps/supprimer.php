@@ -1,4 +1,8 @@
 <?php
+// Inclure les fichiers nécessaires
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/emplois_du_temps.php');    
+
 // supprimer.php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];

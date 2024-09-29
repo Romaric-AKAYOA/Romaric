@@ -1,4 +1,8 @@
 <?php
+// Inclure les fichiers nécessaires
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/enseignants_classes.php');  // Mise à jour ici
+
 // ajouter.php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $enseignant_id = $_POST['enseignant_id'];

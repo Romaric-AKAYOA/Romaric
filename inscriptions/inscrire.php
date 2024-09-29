@@ -1,6 +1,7 @@
 <?php
-include('../../src/db.php');
-include('../../src/inscriptions.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/inscriptions.php');
+
 
 $etudiants = lister_etudiants();
 $cours = lister_cours();

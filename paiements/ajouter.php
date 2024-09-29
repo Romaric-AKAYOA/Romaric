@@ -1,4 +1,8 @@
 <?php
+// Inclure les fichiers nécessaires
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/paiements.php');
+
 // ajouter.php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $etudiant_id = $_POST['etudiant_id'];
