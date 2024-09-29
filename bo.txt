@@ -1,0 +1,51 @@
+gestion_scolaire/
+│
+├── public/
+│   ├── index.php
+│   ├── login.php
+│   ├── dashboard.php
+│   ├── etudiants/
+│   │   ├── ajouter.php
+│   │   ├── modifier.php
+│   │   ├── supprimer.php
+│   │   ├── lister.php
+│   ├── enseignants/
+│   │   ├── ajouter.php
+│   │   ├── modifier.php
+│   │   ├── supprimer.php
+│   │   ├── lister.php
+│   ├── cours/
+│   │   ├── ajouter.php
+│   │   ├── modifier.php
+│   │   ├── supprimer.php
+│   │   ├── lister.php
+│   ├── classes/
+│   │   ├── ajouter.php
+│   │   ├── modifier.php
+│   │   ├── supprimer.php
+│   │   ├── lister.php
+│   ├── inscriptions/
+│   │   ├── inscrire.php
+│   │   ├── desinscrire.php
+│   │   ├── lister.php
+│   ├── notes/
+│   │   ├── ajouter.php
+│   │   ├── modifier.php
+│   │   ├── supprimer.php
+│   │   ├── lister.php
+│
+├── src/
+│   ├── db.php          # Fichier de connexion à la base de données
+│   ├── utilisateurs.php # Gestion des utilisateurs (session)
+│   ├── etudiants.php    # Fonctions liées aux étudiants
+│   ├── enseignants.php  # Fonctions liées aux enseignants
+│   ├── cours.php        # Fonctions liées aux cours
+│   ├── classes.php      # Fonctions liées aux classes
+│   ├── inscriptions.php # Fonctions liées aux inscriptions
+│   ├── notes.php        # Fonctions liées aux notes
+│
+└── assets/
+    ├── css/
+    │   └── style.css    # Fichier CSS pour les styles personnalisés
+    └── js/
+        └── script.js    # Fichier JavaScript pour les interactions front-end
