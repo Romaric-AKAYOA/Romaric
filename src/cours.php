@@ -33,9 +33,16 @@ function supprimer_cours($id) {
 }
 
 function lister_cours() {
-    global $conn;
-    $stmt = $conn->query("SELECT cours.*, enseignants.nom as nom_enseignant, enseignants.prenom as prenom_enseignant FROM cours
-                          LEFT JOIN enseignants ON cours.enseignant_id = enseignants.id");
+    global $db; // Utiliser la variable globale $db pour la connexion à la base de données
+
+    // Requête SQL pour récupérer les cours, y compris le coefficient et les informations sur l'enseignant
+    $stmt = $db->query("SELECT cours.*, enseignants.nom AS nom_enseignant, enseignants.prenom AS prenom_enseignant, cours.coefficient 
+                        FROM cours
+                        LEFT JOIN enseignants ON cours.enseignant_id = enseignants.id");
+    
+    // Renvoyer tous les résultats sous forme de tableau
     return $stmt->fetchAll();
 }
 ?>
+
+

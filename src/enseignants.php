@@ -24,21 +24,21 @@ function ajouter_enseignant($nom, $prenom, $email, $telephone, $adresse) {
 }
 
 function get_enseignant_by_id($id) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM enseignants WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("SELECT * FROM enseignants WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
 function modifier_enseignant($id, $nom, $prenom, $email, $specialite) {
-    global $conn;
-    $stmt = $conn->prepare("UPDATE enseignants SET nom = ?, prenom = ?, email = ?, specialite = ? WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("UPDATE enseignants SET nom = ?, prenom = ?, email = ?, specialite = ? WHERE id = ?");
     $stmt->execute([$nom, $prenom, $email, $specialite, $id]);
 }
 
 function supprimer_enseignant($id) {
-    global $conn;
-    $stmt = $conn->prepare("DELETE FROM enseignants WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("DELETE FROM enseignants WHERE id = ?");
     $stmt->execute([$id]);
 }
 
