@@ -1,10 +1,26 @@
 <?php
 include('db.php');
 
-function ajouter_enseignant($nom, $prenom, $email, $specialite) {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO enseignants (nom, prenom, email, specialite) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$nom, $prenom, $email, $specialite]);
+// Fonction pour ajouter un enseignant
+function ajouter_enseignant($nom, $prenom, $email, $telephone, $adresse) {
+    global $db;  // Utiliser la connexion globale via $db
+
+    try {
+        $sql = "INSERT INTO enseignants (nom, prenom, email, telephone, adresse) VALUES (:nom, :prenom, :email, :telephone, :adresse)";
+        $stmt = $db->prepare($sql);
+        
+        // Lier les paramètres
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':telephone', $telephone);
+        $stmt->bindParam(':adresse', $adresse);
+        
+        // Exécuter la requête
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de l'enseignant : " . $e->getMessage();
+    }
 }
 
 function get_enseignant_by_id($id) {
@@ -26,9 +42,20 @@ function supprimer_enseignant($id) {
     $stmt->execute([$id]);
 }
 
+// Fonction pour lister les enseignants
 function lister_enseignants() {
-    global $conn;
-    $stmt = $conn->query("SELECT * FROM enseignants");
-    return $stmt->fetchAll();
+    global $db;  // Utiliser la connexion globale via $db
+    
+    try {
+        $sql = "SELECT * FROM enseignants"; // Requête pour sélectionner tous les enseignants
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les enseignants sous forme de tableau associatif
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des enseignants : " . $e->getMessage();
+        return []; // Retourne un tableau vide en cas d'erreur
+    }
 }
+
 ?>

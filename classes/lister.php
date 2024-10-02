@@ -1,9 +1,10 @@
 <?php
+// Inclure les fichiers nécessaires
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
-include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/classes.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/enseignants.php');    
 
-// Appel de la fonction pour lister les classes
-$classes = lister_classes(); // Assurez-vous que cette fonction est bien définie
+// Récupérer la liste des enseignants
+$enseignants = lister_enseignants();
 ?>
 
 <!DOCTYPE html>
@@ -11,41 +12,50 @@ $classes = lister_classes(); // Assurez-vous que cette fonction est bien défini
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Classes</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <title>Liste des Enseignants</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Liste des Classes</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Année Scolaire</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($classes): // Vérifiez si $classes n'est pas vide ?>
-                <?php foreach ($classes as $classe): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($classe['id']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['annee_scolaire']); ?></td>
-                    <td><?php echo htmlspecialchars($classe['description']); ?></td>
-                    <td>
-                        <a href="modifier.php?id=<?php echo $classe['id']; ?>">Modifier</a>
-                        <a href="supprimer.php?id=<?php echo $classe['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?');">Supprimer</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="5">Aucune classe trouvée.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Liste des Enseignants</h2>
+        
+        <?php if (empty($enseignants)): ?>
+            <div class="alert alert-warning" role="alert">
+                Aucun enseignant trouvé. <a href="ajouter_enseignant.php" class="alert-link">Ajouter un Enseignant</a>
+            </div>
+        <?php else: ?>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Adresse</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($enseignants as $enseignant): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($enseignant['id']); ?></td>
+                            <td><?php echo htmlspecialchars($enseignant['nom']); ?></td>
+                            <td><?php echo htmlspecialchars($enseignant['prenom']); ?></td>
+                            <td><?php echo htmlspecialchars($enseignant['email']); ?></td>
+                            <td><?php echo htmlspecialchars($enseignant['telephone']); ?></td>
+                            <td><?php echo htmlspecialchars($enseignant['adresse']); ?></td>
+                            <td>
+                                <a href="modifier_enseignant.php?id=<?php echo $enseignant['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="supprimer_enseignant.php?id=<?php echo $enseignant['id']; ?>" class="btn btn-danger btn-sm">Supprimer</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
