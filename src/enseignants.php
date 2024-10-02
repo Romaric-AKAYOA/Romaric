@@ -30,11 +30,27 @@ function get_enseignant_by_id($id) {
     return $stmt->fetch();
 }
 
-function modifier_enseignant($id, $nom, $prenom, $email, $specialite) {
+function modifier_enseignant($id, $nom, $prenom, $email, $adresse) {
     global $db; 
+
+    // Vérification des entrées
+    if (empty($nom) || empty($prenom) || empty($email) || empty($adresse)) {
+        throw new Exception("Tous les champs sont requis.");
+    }
+
+    // Préparation de la requête
     $stmt = $db->prepare("UPDATE enseignants SET nom = ?, prenom = ?, email = ?, specialite = ? WHERE id = ?");
-    $stmt->execute([$nom, $prenom, $email, $specialite, $id]);
+
+    try {
+        // Exécution de la requête
+        $stmt->execute([$nom, $prenom, $email, $specialite, $id]);
+        return true; // Retourne true si la mise à jour réussit
+    } catch (PDOException $e) {
+        // Gestion des erreurs en cas d'échec
+        throw new Exception("Erreur lors de la mise à jour : " . $e->getMessage());
+    }
 }
+
 
 function supprimer_enseignant($id) {
     global $db; 

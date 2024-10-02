@@ -3,9 +3,15 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/enseignants.php');    
 
-
-$id = $_GET['id'];
-$enseignant = get_enseignant_by_id($id);
+// Vérifier si l'ID est présent dans l'URL
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $enseignant = get_enseignant_by_id($id);
+} else {
+    // Rediriger ou afficher un message d'erreur si l'ID n'est pas présent
+    header('Location: lister.php'); // Rediriger vers la liste des enseignants
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
@@ -18,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un Enseignant</title>
-    <!-- Lien vers Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -33,25 +39,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="POST">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" name="nom" value="<?php echo $enseignant['nom']; ?>" required>
+                <input type="text" class="form-control" name="nom" value="<?php echo htmlspecialchars($enseignant['nom']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" name="prenom" value="<?php echo $enseignant['prenom']; ?>" required>
+                <input type="text" class="form-control" name="prenom" value="<?php echo htmlspecialchars($enseignant['prenom']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="<?php echo $enseignant['email']; ?>" required>
+                <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($enseignant['email']); ?>" required>
             </div>
+                        
             <div class="mb-3">
-                <label for="specialite" class="form-label">Spécialité</label>
-                <input type="text" class="form-control" name="specialite" value="<?php echo $enseignant['specialite']; ?>" required>
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" class="form-control" id="adresse" name="adresse"  value="<?php echo htmlspecialchars($enseignant['adresse']); ?>" required>
             </div>
+
             <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
     </div>
 
-    <!-- Lien vers Bootstrap JS (si nécessaire pour les interactions comme les modals ou dropdowns) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
