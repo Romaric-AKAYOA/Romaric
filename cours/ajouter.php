@@ -1,22 +1,21 @@
 <?php
-// Inclure les fichiers nécessaires
+// Inclure la connexion à la base de données
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
-include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/cours.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/cours.php'); 
+
+global $db;  // Utiliser la variable globale
 
 // Connexion à la base de données et récupération des enseignants
 try {
-    $db = new PDO('mysql:host=localhost;dbname=nom_base_de_donnees', 'utilisateur', 'mot_de_passe');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
     // Récupérer les enseignants depuis la table enseignants
     $sql = "SELECT id, nom, prenom FROM enseignants";
-    $stmt = $db->prepare($sql);
+    $stmt = $db->prepare($sql);  // Utilisation de la variable globale $db
     $stmt->execute();
     
     $enseignants = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Récupère tous les enseignants dans un tableau associatif
     
 } catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
+    echo "Erreur lors de la récupération des enseignants : " . $e->getMessage();
     exit;
 }
 
@@ -65,6 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea name="description" class="form-control" id="description" rows="3" required></textarea>
             </div>
 
+           <!-- Ajout du champ Coefficient -->
+            <div class="mb-3">
+                <label for="coefficient" class="form-label">Coefficient</label>
+                <input type="number" name="coefficient" class="form-control" id="coefficient" required min="1" step="1">
+            </div>
+
             <div class="mb-3">
                 <label for="enseignant_id" class="form-label">Enseignant</label>
                 <select name="enseignant_id" class="form-select" id="enseignant_id" required>
@@ -75,12 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </option>
                     <?php endforeach; ?>
                 </select>
-            </div>
-
-            <!-- Ajout du champ Coefficient -->
-            <div class="mb-3">
-                <label for="coefficient" class="form-label">Coefficient</label>
-                <input type="number" step="0.01" name="coefficient" class="form-control" id="coefficient" required>
             </div>
 
             <div class="d-grid">

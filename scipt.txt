@@ -39,8 +39,10 @@ CREATE TABLE cours (
     nom VARCHAR(100) NOT NULL,
     description TEXT,
     enseignant_id INT,
+    coefficient INT, 
     FOREIGN KEY (enseignant_id) REFERENCES enseignants(id) ON DELETE SET NULL
 );
+
 
 -- Table pour les classes
 CREATE TABLE classes (

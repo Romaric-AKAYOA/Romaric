@@ -1,11 +1,17 @@
 <?php
 include('db.php');
 
-function ajouter_cours($nom, $description, $enseignant_id) {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO cours (nom, description, enseignant_id) VALUES (?, ?, ?)");
-    $stmt->execute([$nom, $description, $enseignant_id]);
+function ajouter_cours($nom, $description, $enseignant_id, $coefficient) {
+    global $db; // Utiliser la variable globale $db pour la connexion à la base de données
+    try {
+        $stmt = $db->prepare("INSERT INTO cours (nom, description, enseignant_id, coefficient) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$nom, $description, $enseignant_id, $coefficient]); // Ajout du coefficient
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout du cours : " . $e->getMessage();
+        exit();
+    }
 }
+
 
 function get_cours_by_id($id) {
     global $conn;
