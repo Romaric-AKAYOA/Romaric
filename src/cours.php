@@ -14,21 +14,21 @@ function ajouter_cours($nom, $description, $enseignant_id, $coefficient) {
 
 
 function get_cours_by_id($id) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM cours WHERE id = ?");
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM cours WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
 function modifier_cours($id, $nom, $description, $enseignant_id) {
-    global $conn;
-    $stmt = $conn->prepare("UPDATE cours SET nom = ?, description = ?, enseignant_id = ? WHERE id = ?");
+    global $db;
+    $stmt = $db->prepare("UPDATE cours SET nom = ?, description = ?, enseignant_id = ? WHERE id = ?");
     $stmt->execute([$nom, $description, $enseignant_id, $id]);
 }
 
 function supprimer_cours($id) {
-    global $conn;
-    $stmt = $conn->prepare("DELETE FROM cours WHERE id = ?");
+    global $db;
+    $stmt = $db->prepare("DELETE FROM cours WHERE id = ?");
     $stmt->execute([$id]);
 }
 

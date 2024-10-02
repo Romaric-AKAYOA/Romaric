@@ -18,21 +18,21 @@ function ajouter_etudiant($nom, $prenom, $date_naissance, $email) {
     }
 }
 function get_etudiant_by_id($id) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM etudiants WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("SELECT * FROM etudiants WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
 function modifier_etudiant($id, $nom, $prenom, $date_naissance, $email) {
-    global $conn;
-    $stmt = $conn->prepare("UPDATE etudiants SET nom = ?, prenom = ?, date_naissance = ?, email = ? WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("UPDATE etudiants SET nom = ?, prenom = ?, date_naissance = ?, email = ? WHERE id = ?");
     $stmt->execute([$nom, $prenom, $date_naissance, $email, $id]);
 }
 
 function supprimer_etudiant($id) {
-    global $conn;
-    $stmt = $conn->prepare("DELETE FROM etudiants WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("DELETE FROM etudiants WHERE id = ?");
     $stmt->execute([$id]);
 }
 

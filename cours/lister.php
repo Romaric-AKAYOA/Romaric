@@ -13,26 +13,25 @@ $cours = lister_cours(); // Assurez-vous que cette fonction est définie dans co
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Cours</title>
-
+    
     <!-- Inclure Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- Votre feuille de style personnalisée (facultatif) -->
     <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center">Liste des Cours</h2>
-        
-        <!-- Tableau des cours -->
+        <h2 class="text-center mb-4">Liste des Cours</h2>
+
         <table class="table table-striped table-bordered">
-            <thead class="table-dark">
+            <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Nom du Cours</th>
-                    <th>Enseignant</th>
-                    <th>Coefficient</th> <!-- Nouveau champ Coefficient -->
-                    <th>Actions</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom du Cours</th>
+                    <th scope="col">Enseignant</th>
+                    <th scope="col">Coefficient</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,9 +39,12 @@ $cours = lister_cours(); // Assurez-vous que cette fonction est définie dans co
                     <?php foreach ($cours as $cour): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($cour['id']); ?></td>
-                        <td><?php echo htmlspecialchars($cour['nom_cours']); ?></td>
-                        <td><?php echo htmlspecialchars($cour['enseignant']); ?></td>
-                        <td><?php echo htmlspecialchars($cour['coefficient']); ?></td> <!-- Afficher le coefficient -->
+                        <!-- Utilisation correcte du nom de colonne -->
+                        <td><?php echo htmlspecialchars($cour['nom']); ?></td>
+                        <!-- Afficher le nom et prénom de l'enseignant -->
+                        <td><?php echo htmlspecialchars($cour['nom_enseignant'] . ' ' . $cour['prenom_enseignant']); ?></td>
+                        <!-- Afficher le coefficient -->
+                        <td><?php echo htmlspecialchars($cour['coefficient']); ?></td>
                         <td>
                             <a href="modifier.php?id=<?php echo $cour['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
                             <a href="supprimer.php?id=<?php echo $cour['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr ?');">Supprimer</a>
@@ -58,7 +60,8 @@ $cours = lister_cours(); // Assurez-vous que cette fonction est définie dans co
         </table>
     </div>
 
-    <!-- Inclure Bootstrap JS (facultatif pour des composants JS comme les modales) -->
+    <!-- Inclure Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
