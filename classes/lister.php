@@ -30,6 +30,8 @@ $classes = lister_classes();
                         <th>ID</th>
                         <th>Nom de la Classe</th>
                         <th>Niveau</th>
+                        <th>Année Scolaire</th>
+                        <th>Description</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -38,10 +40,12 @@ $classes = lister_classes();
                         <tr>
                             <td><?php echo htmlspecialchars($classe['id']); ?></td>
                             <td><?php echo htmlspecialchars($classe['nom']); ?></td>
-                            <td><?php echo htmlspecialchars($classe['niveau']); ?></td>
+                            <td><?php echo isset($classe['niveau']) ? htmlspecialchars($classe['niveau']) : 'Niveau inconnu'; ?></td>
+                            <td><?php echo htmlspecialchars($classe['annee_scolaire']); ?></td>
+                            <td><?php echo htmlspecialchars($classe['description']); ?></td>
                             <td>
-                                <a href="modifier_classe.php?id=<?php echo $classe['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
-                                <a href="supprimer_classe.php?id=<?php echo $classe['id']; ?>" class="btn btn-danger btn-sm">Supprimer</a>
+                                <a href="modifier.php?id=<?php echo $classe['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="supprime.php?id=<?php echo $classe['id']; ?>" class="btn btn-danger btn-sm">Supprimer</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

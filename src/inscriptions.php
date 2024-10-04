@@ -2,21 +2,21 @@
 include('db.php');
 
 function inscrire_etudiant($etudiant_id, $cours_id) {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO inscriptions (etudiant_id, cours_id) VALUES (?, ?)");
+    global $db; 
+    $stmt = $db->prepare("INSERT INTO inscriptions (etudiant_id, cours_id) VALUES (?, ?)");
     $stmt->execute([$etudiant_id, $cours_id]);
 }
 
 function desinscrire_etudiant($id) {
-    global $conn;
-    $stmt = $conn->prepare("DELETE FROM inscriptions WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("DELETE FROM inscriptions WHERE id = ?");
     $stmt->execute([$id]);
 }
 
 // Dans votre fichier inscriptions.php
 function lister_inscriptions() {
-    global $conn; // Utilise la connexion à la base de données
-    $stmt = $conn->query("
+    global $db;  // Utilise la connexion à la base de données
+    $stmt = $db->query("
         SELECT inscriptions.id, 
                etudiants.nom AS etudiant_nom, 
                etudiants.prenom AS etudiant_prenom, 
@@ -30,22 +30,22 @@ function lister_inscriptions() {
 }
 
 function inscrireUtilisateur($nom, $email, $mot_de_passe) {
-    global $conn;
+    global $db; 
 
     // Hachage du mot de passe
     $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute([$nom, $email, $mot_de_passe_hash]);
 }
 
 
 function connecterUtilisateur($email, $mot_de_passe) {
-    global $conn;
+    global $db; 
 
     $sql = "SELECT * FROM utilisateurs WHERE email = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute([$email]);
     $utilisateur = $stmt->fetch();
 

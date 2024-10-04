@@ -39,11 +39,11 @@ function modifier_enseignant($id, $nom, $prenom, $email, $adresse) {
     }
 
     // Préparation de la requête
-    $stmt = $db->prepare("UPDATE enseignants SET nom = ?, prenom = ?, email = ?, specialite = ? WHERE id = ?");
+    $stmt = $db->prepare("UPDATE enseignants SET nom = ?, prenom = ?, email = ?, adresse = ? WHERE id = ?");
 
     try {
         // Exécution de la requête
-        $stmt->execute([$nom, $prenom, $email, $specialite, $id]);
+        $stmt->execute([$nom, $prenom, $email, $adresse, $id]);
         return true; // Retourne true si la mise à jour réussit
     } catch (PDOException $e) {
         // Gestion des erreurs en cas d'échec

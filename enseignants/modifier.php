@@ -1,7 +1,7 @@
 <?php
 // Inclure les fichiers nécessaires
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');    
-include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/enseignants.php');    
+include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/enseignants.php');
 
 // Vérifier si l'ID est présent dans l'URL
 if (isset($_GET['id'])) {
@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
-    $specialite = $_POST['specialite'];
+    $adresse = $_POST['adresse']; // Correction ici
     
-    modifier_enseignant($id, $nom, $prenom, $email, $specialite);
+    modifier_enseignant($id, $nom, $prenom, $email, $adresse);
     header('Location: lister.php');
     exit();
 }
@@ -49,12 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($enseignant['email']); ?>" required>
             </div>
-                        
             <div class="mb-3">
                 <label for="adresse" class="form-label">Adresse</label>
-                <input type="text" class="form-control" id="adresse" name="adresse"  value="<?php echo htmlspecialchars($enseignant['adresse']); ?>" required>
+                <input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo htmlspecialchars($enseignant['adresse']); ?>" required>
             </div>
-
             <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
     </div>

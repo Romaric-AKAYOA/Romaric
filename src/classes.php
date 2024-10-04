@@ -28,21 +28,21 @@ function ajouter_classe($nom, $annee_scolaire, $description) {
 }
 
 function get_classe_by_id($id) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM classes WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("SELECT * FROM classes WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
 function modifier_classe($id, $nom, $annee_scolaire, $description) {
-    global $conn;
-    $stmt = $conn->prepare("UPDATE classes SET nom = ?, annee_scolaire = ?, description = ? WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("UPDATE classes SET nom = ?, annee_scolaire = ?, description = ? WHERE id = ?");
     $stmt->execute([$nom, $annee_scolaire, $description, $id]);
 }
 
 function supprimer_classe($id) {
-    global $conn;
-    $stmt = $conn->prepare("DELETE FROM classes WHERE id = ?");
+    global $db; 
+    $stmt = $db->prepare("DELETE FROM classes WHERE id = ?");
     $stmt->execute([$id]);
 }
 
