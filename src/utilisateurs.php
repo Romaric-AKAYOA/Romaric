@@ -10,15 +10,15 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Fonction pour inscrire un nouvel utilisateur
-function inscrireUtilisateur($nom, $email, $mot_de_passe) {
-    global $conn;
+function inscrireUtilisateur($nom, $email, $mot_de_passe, $role) {
+    global $db;
 
     // Hachage du mot de passe
     $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$nom, $email, $mot_de_passe_hash]);
+    $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?, ?)";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$nom, $email, $mot_de_passe_hash, $role]);
 }
 
 // Fonction pour se connecter
@@ -36,10 +36,10 @@ function login($email, $password) {
     }
 
     // Vérification avec la base de données
-    global $conn;
+    global $db;
 
     try {
-        $stmt = $conn->prepare('SELECT * FROM utilisateurs WHERE email = :email');
+        $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE email = :email');
         $stmt->execute(['email' => $email]);
         $utilisateur = $stmt->fetch();
 

@@ -7,10 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $role = $_POST['role'];
 
     // Code pour mettre à jour l'utilisateur dans la base de données
-    $sql = "UPDATE utilisateurs SET nom = ?, email = ?, role = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$nom, $email, $role, $id]);
-    echo "Utilisateur modifié avec succès!";
+    ajouterEvenement($titre, $description, $date_evenement, $lieu) ;
+    header('Location: lister.php');
+    exit();
 }
 ?>
 

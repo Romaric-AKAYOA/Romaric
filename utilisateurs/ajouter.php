@@ -6,11 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_BCRYPT);
     $role = $_POST['role'];
 
-    // Code pour ajouter l'utilisateur à la base de données
-    $sql = "INSERT INTO utilisateurs (nom, email, mot_de_passe, role) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$nom, $email, $mot_de_passe, $role]);
-    echo "Utilisateur ajouté avec succès!";
+    inscrireUtilisateur($nom, $email, $mot_de_passe, $role) ;
+    header('Location: lister.php');
+    exit();
 }
 ?>
 
