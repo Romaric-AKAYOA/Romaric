@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Code pour ajouter à la base de données
     $sql = "INSERT INTO absences (etudiant_id, cours_id, date_absence, justification) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute([$etudiant_id, $cours_id, $date_absence, $justification]);
-    echo "Absence ajoutée avec succès!";
+    header('Location: lister.php');
 }
 ?>
 

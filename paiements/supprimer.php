@@ -4,15 +4,10 @@ include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/db.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/Gest_scolaire_2/src/paiements.php');
 
 // supprimer.php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
-
-    // Code pour supprimer de la base de données
-    $sql = "DELETE FROM paiements WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$id]);
-    echo "Paiement supprimé avec succès!";
-}
+$id = $_GET['id'];
+supprimerPaiement($id);
+header('Location: lister.php');
+exit();
 ?>
 
 <!DOCTYPE html>

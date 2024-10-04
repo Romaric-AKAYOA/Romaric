@@ -185,7 +185,7 @@ if (!isset($_SESSION['utilisateur_id'])) {
             <!-- Programme scolaire -->
             <div class="col-lg-6 mb-4">
                 <div class="card">
-                    <img class="card-img-top" src="mages\téléchargement.jpg" alt="Programme scolaire">
+                    <img class="card-img-top" src="images\téléchargement.jpg" alt="Programme scolaire">
                     <div class="card-body">
                         <h5 class="card-title">Nos programmes</h5>
                         <p class="card-text">Découvrez nos programmes variés, conçus pour préparer les étudiants à exceller dans leurs domaines respectifs.</p>

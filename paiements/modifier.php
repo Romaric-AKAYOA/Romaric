@@ -12,10 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statut = $_POST['statut'];
 
     // Code pour mettre à jour l'enregistrement dans la base de données
-    $sql = "UPDATE paiements SET etudiant_id = ?, montant = ?, description = ?, statut = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$etudiant_id, $montant, $description, $statut, $id]);
-    echo "Paiement modifié avec succès!";
+    modifierPaiement($id, $montant, $description, $statut) ;
+    header('Location: lister.php');
+    exit();
 }
 ?>
 

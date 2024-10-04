@@ -11,10 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $statut = $_POST['statut'];
 
     // Code pour ajouter à la base de données
-    $sql = "INSERT INTO paiements (etudiant_id, montant, description, statut) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$etudiant_id, $montant, $description, $statut]);
-    echo "Paiement ajouté avec succès!";
+    ajouterPaiement($etudiant_id, $montant, $description, $statut);
+    header('Location: lister.php');
+    exit();
 }
 ?>
 
