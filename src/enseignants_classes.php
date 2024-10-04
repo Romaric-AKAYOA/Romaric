@@ -3,10 +3,10 @@
 
 // Assigner un enseignant à une classe
 function assignerEnseignantClasse($enseignant_id, $classe_id) {
-    global $conn;
+    global $db; 
     $sql = "INSERT INTO enseignants_classes (enseignant_id, classe_id) 
             VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute([$enseignant_id, $classe_id]);
 }
 
@@ -22,21 +22,21 @@ function modifierEnseignantClasse($id, $enseignant_id, $classe_id) {
 
 // Supprimer une relation enseignant-classe
 function supprimerEnseignantClasse($id) {
-    global $conn;
+    global $db; 
     $sql = "DELETE FROM enseignants_classes WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $db->prepare($sql);
     $stmt->execute([$id]);
 }
 
 // Lister les relations enseignants-classes
 function listerEnseignantsClasses() {
-    global $conn;
+    global $db; 
     $sql = "SELECT * FROM enseignants_classes";
-    return $conn->query($sql)->fetchAll();
+    return $db->query($sql)->fetchAll();
 }
 // Fonction pour lister les relations enseignants-classes
 function lister_relations() {
-    global $conn; // Assurez-vous que $conn est accessible ici
+    global $db;  // Assurez-vous que $conn est accessible ici
 
     // Requête SQL
     $sql = "SELECT ec.id, e.nom AS enseignant_nom, c.nom AS classe_nom 
@@ -45,7 +45,7 @@ function lister_relations() {
             JOIN classes c ON ec.classe_id = c.id";
 
     // Exécution de la requête
-    $stmt = $conn->query($sql);
+    $stmt = $db->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retourner les résultats
 }
 ?>

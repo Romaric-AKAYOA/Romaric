@@ -147,6 +147,17 @@ if (!isset($_SESSION['utilisateur_id'])) {
                         <a class="dropdown-item" href="enseignants_classes/modifier.php">Modifier une relation</a>
                     </div>
                 </li>
+                <!-- Gérer les utilisateurs -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="utilisateursDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Gérer les utilisateurs
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="utilisateurDropdown">
+                        <a class="dropdown-item" href="utilisateurs/lister.php">Lister les relations</a>
+                        <a class="dropdown-item" href="utilisateurs/ajouter.php">Ajouter une relation</a>
+                        <a class="dropdown-item" href="utilisateurs/modifier.php">Modifier une relation</a>
+                    </div>
+                </li>
                 <!-- Déconnexion -->
                 <li class="nav-item">
                     <a class="nav-link" href="login.php">Déconnexion</a>
@@ -320,6 +331,21 @@ if (!isset($_SESSION['utilisateur_id'])) {
                     </div>
                 </div>
             </div>
+
+            <!-- Gérer les utilisateurs -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gérer les utilisateurs</h5>
+                        <p class="card-text">Ajoutez ou modifiez les utilisateurss.</p>
+                        <a href="utilisateurs/lister.php" class="btn btn-primary">Lister</a>
+                        <a href="utilisateurs/ajouter.php" class="btn btn-secondary">Ajouter</a>
+                        <a href="utilisateurs/modifier.php" class="btn btn-secondary">Modifier</a>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </section>

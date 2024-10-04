@@ -9,11 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $classe_id = $_POST['classe_id'];
 
     // Code pour ajouter à la base de données
-    $sql = "INSERT INTO enseignants_classes (enseignant_id, classe_id) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$enseignant_id, $classe_id]);
-    echo "Relation enseignant-classe ajoutée avec succès!";
+    assignerEnseignantClasse($enseignant_id, $classe_id) ;
+    header('Location: lister.php'); // Redirige vers la liste des enseignants après l'ajout
+    exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>

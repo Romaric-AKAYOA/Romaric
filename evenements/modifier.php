@@ -11,11 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_evenement = $_POST['date_evenement'];
     $lieu = $_POST['lieu'];
 
-    // Code pour mettre à jour l'événement dans la base de données
-    $sql = "UPDATE evenements SET titre = ?, description = ?, date_evenement = ?, lieu = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$titre, $description, $date_evenement, $lieu, $id]);
-    echo "Événement modifié avec succès!";
+    modifierEvenement($id, $titre, $description, $date_evenement, $lieu);
+    header('Location: lister.php');
+    exit();
 }
 ?>
 

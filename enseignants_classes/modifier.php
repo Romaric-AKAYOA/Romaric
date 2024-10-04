@@ -10,10 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $classe_id = $_POST['classe_id'];
 
     // Code pour mettre à jour la relation dans la base de données
-    $sql = "UPDATE enseignants_classes SET enseignant_id = ?, classe_id = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$enseignant_id, $classe_id, $id]);
-    echo "Relation enseignant-classe modifiée avec succès!";
+    modifierEnseignantClasse($id, $enseignant_id, $classe_id) ;
+    header('Location: lister.php'); // Redirige vers la liste des enseignants après l'ajout
+    exit();
 }
 ?>
 

@@ -11,10 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lieu = $_POST['lieu'];
 
     // Code pour ajouter à la base de données
-    $sql = "INSERT INTO evenements (titre, description, date_evenement, lieu) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$titre, $description, $date_evenement, $lieu]);
-    echo "Événement ajouté avec succès!";
+    ajouterEvenement($titre, $description, $date_evenement, $lieu) ;
+    header('Location: lister.php');
+    exit();
 }
 ?>
 
