@@ -53,7 +53,30 @@ function login($email, $password) {
     }
 
     return false;
+}function supprimer_utilisateurs($id) {
+    global $db; // Utiliser la connexion PDO définie globalement
+    try {
+        // Préparer la requête SQL pour supprimer l'utilisateur
+        $sql = "DELETE FROM utilisateurs WHERE id = :id";
+        $stmt = $db->prepare($sql); // Corriger ici pour utiliser $db
+
+        // Lier le paramètre id
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $stmt->execute();
+
+        echo "Utilisateur supprimé avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression de l'utilisateur : " . $e->getMessage();
+    }
+
+    // Fermeture de la connexion (si nécessaire)
+    // Note : En général, la connexion se ferme automatiquement à la fin du script.
+    // Vous pouvez la fermer explicitement si nécessaire.
+    $db = null; // Corriger ici pour utiliser $db
 }
+
 
 // Fonction pour vérifier si l'utilisateur est connecté
 function isLoggedIn() {
