@@ -13,44 +13,63 @@ $paiements = lister_paiements(); // Assurez-vous que cette fonction est définie
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Paiements</title>
-    <link rel="stylesheet" href="../../assets/css/style.css"> <!-- Assurez-vous que ce chemin est correct -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Couleur de fond claire */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Liste des Paiements</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Étudiant ID</th>
-                <th>Montant</th>
-                <th>Date Paiement</th>
-                <th>Description</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($paiements): // Vérifiez si $paiements n'est pas vide ?>
-                <?php foreach ($paiements as $paiement): ?>
+    <div class="container">
+        <h2>Liste des Paiements</h2>
+        <table class="table table-bordered">
+            <thead class="thead-light">
                 <tr>
-                    <td><?= htmlspecialchars($paiement['id']) ?></td>
-                    <td><?= htmlspecialchars($paiement['etudiant_id']) ?></td>
-                    <td><?= htmlspecialchars($paiement['montant']) ?></td>
-                    <td><?= htmlspecialchars($paiement['date_paiement']) ?></td>
-                    <td><?= htmlspecialchars($paiement['description']) ?></td>
-                    <td><?= htmlspecialchars($paiement['statut']) ?></td>
-                    <td>
-                        <a href="modifier.php?id=<?= htmlspecialchars($paiement['id']) ?>">Modifier</a>
-                        <a href="supprimer.php?id=<?= htmlspecialchars($paiement['id']) ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce paiement ?');">Supprimer</a>
-                    </td>
+                    <th>ID</th>
+                    <th>Étudiant ID</th>
+                    <th>Montant</th>
+                    <th>Date Paiement</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
                 </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="7">Aucun paiement trouvé.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if ($paiements): // Vérifiez si $paiements n'est pas vide ?>
+                    <?php foreach ($paiements as $paiement): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($paiement['id']) ?></td>
+                        <td><?= htmlspecialchars($paiement['etudiant_id']) ?></td>
+                        <td><?= htmlspecialchars($paiement['montant']) ?></td>
+                        <td><?= htmlspecialchars($paiement['date_paiement']) ?></td>
+                        <td><?= htmlspecialchars($paiement['description']) ?></td>
+                        <td><?= htmlspecialchars($paiement['statut']) ?></td>
+                        <td>
+                            <a href="modifier.php?id=<?= htmlspecialchars($paiement['id']) ?>" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="supprimer.php?id=<?= htmlspecialchars($paiement['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce paiement ?');">Supprimer</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun paiement trouvé.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
