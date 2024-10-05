@@ -1,6 +1,14 @@
 <?php
 // evenements.php - Fonctions liées aux événements scolaires
 
+function obtenirEvenement($id) {
+    global $db; // Assurez-vous d'utiliser la connexion à votre base de données
+    $sql = "SELECT * FROM evenements WHERE id = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne l'événement sous forme de tableau associatif
+}
+
 // Ajouter un événement
 function ajouterEvenement($titre, $description, $date_evenement, $lieu) {
     global $db; 

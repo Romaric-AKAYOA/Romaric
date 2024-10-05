@@ -10,11 +10,11 @@ function ajouterEmploiDuTemps($classe_id, $cours_id, $jour_semaine, $heure_debut
 }
 
 // Modifier un emploi du temps
-function modifierEmploiDuTemps($id, $classe_id, $cours_id, $jour_semaine, $heure_debut, $heure_fin, $salle) {
+function modifierEmploiDuTemps($id, $classe_id, $cours_id, $jour_semaine, $heure_debut, $heure_fin) {
     global $db; 
-    $sql = "UPDATE emplois_du_temps SET classe_id = ?, cours_id = ?, jour_semaine = ?, heure_debut = ?, heure_fin = ?, salle = ? WHERE id = ?";
+    $sql = "UPDATE emplois_du_temps SET classe_id = ?, cours_id = ?, jour_semaine = ?, heure_debut = ?, heure_fin = ? WHERE id = ?";
     $stmt = $db->prepare($sql);
-    $stmt->execute([$classe_id, $cours_id, $jour_semaine, $heure_debut, $heure_fin, $salle, $id]);
+    $stmt->execute([$classe_id, $cours_id, $jour_semaine, $heure_debut, $heure_fin, $id]);
 }
 
 // Supprimer un emploi du temps
@@ -31,6 +31,23 @@ function listerEmploisDuTemps() {
     $sql = "SELECT * FROM emplois_du_temps";
     return $db->query($sql)->fetchAll();
 }
+function get_emploi_by_id($id) {
+    global $db;  // Utiliser la connexion à la base de données
+
+    // Préparer la requête SQL pour récupérer l'emploi du temps par ID
+    $sql = "SELECT * FROM emplois_du_temps WHERE id = ?";
+    
+    // Préparer la déclaration
+    $stmt = $db->prepare($sql);
+    
+    // Exécuter la requête avec l'ID passé en paramètre
+    $stmt->execute([$id]);
+
+    // Récupérer les résultats sous forme de tableau associatif
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 function lister_emplois_du_temps() {
     global $db;  // Utilisez la connexion globale à la base de données
     try {
