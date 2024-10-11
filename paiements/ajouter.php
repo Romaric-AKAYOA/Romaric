@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    
     <div class="container">
         <h1 class="mb-4">Ajouter Paiement</h1>
         <form method="POST" class="needs-validation" novalidate>
